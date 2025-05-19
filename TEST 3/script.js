@@ -90,4 +90,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-}));}
+});
