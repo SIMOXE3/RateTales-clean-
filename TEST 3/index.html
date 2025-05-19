@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RateTales - User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar">
+            <div class="logo">
+                <h1>RATE-TALES</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active"><span class="icon">🏠</span> Home</a></li>
+                <li><a href="#"><span class="icon">⭐</span> Favourites</a></li>
+                <li><a href="#"><span class="icon">📝</span> Review</a></li>
+                <li><a href="#"><span class="icon">👥</span> Social</a></li>
+            </ul>
+            <div class="bottom-nav">
+                <ul class="nav-links">
+                    <li><a href="#"><span class="icon">⚙️</span> Settings</a></li>
+                    <li><a href="#"><span class="icon">🚪</span> Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Profile Header -->
+            <div class="profile-header">
+                <div class="profile-info">
+                    <img src="https://placekitten.com/200/200" alt="Profile Picture" class="profile-picture">
+                    <div class="profile-text">
+                        <h2>Jamal <span class="edit-icon">✏️</span></h2>
+                        <p class="username">@username.jamal</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Me Section -->
+            <section class="about-me">
+                <h3>ABOUT ME:</h3>
+                <div class="about-content">
+                    <!-- Content will be added by user -->
+                </div>
+            </section>
+
+            <!-- Posts Grid -->
+            <section class="my-posts">
+                <h3>My Post</h3>
+                <div class="posts-grid">
+                    <!-- Post Items -->
+                    <div class="post-item">
+                        <img src="https://placekitten.com/100/100" alt="Post thumbnail" class="post-thumbnail">
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
+                    <div class="post-item">
+                        <img src="https://placekitten.com/100/100" alt="Post thumbnail" class="post-thumbnail">
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
+                    <div class="post-item">
+                        <img src="https://placekitten.com/100/100" alt="Post thumbnail" class="post-thumbnail">
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
+                    <div class="post-item">
+                        <img src="https://placekitten.com/100/100" alt="Post thumbnail" class="post-thumbnail">
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+</div>
+    </div>
+
+    <!-- Modal Popups -->
+    <div class="modal" id="nameModal">
+        <div class="modal-content">
+            <h3>Edit Display Name</h3>
+            <input type="text" id="displayNameInput" placeholder="Enter your display name">
+            <div class="modal-buttons">
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="usernameModal">
+        <div class="modal-content">
+            <h3>Edit Username</h3>
+            <input type="text" id="usernameInput" placeholder="Enter your username">
+            <div class="modal-buttons">
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <h3>Edit About Me</h3>
+            <textarea id="aboutInput" placeholder="Tell us about yourself..."></textarea>
+            <div class="modal-buttons">
+                <button class="save-btn">Save</button>
+                <button class="cancel-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

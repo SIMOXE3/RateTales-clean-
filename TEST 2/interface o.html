@@ -1,0 +1,304 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   Rate-Tales
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <style>
+   .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #1f2937;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .scroll-container {
+            overflow-x: auto;
+            white-space: nowrap;
+            cursor: grab;
+        }
+
+        .scroll-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .scroll-container:active {
+            cursor: grabbing;
+        }
+
+        .scroll-item {
+            display: inline-block;
+            width: 200px;
+            margin-right: 20px;
+            position: relative;
+        }
+
+        .auto-fit-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: white;
+            cursor: pointer;
+        }
+
+        .heart-icon.favorited {
+            color: red;
+        }
+  </style>
+ </head>
+ <body class="bg-gray-900 text-white">
+  <div class="flex">
+   <!-- Sidebar -->
+   <div class="w-1/5 bg-gray-800 h-screen p-5 flex flex-col justify-between">
+    <div>
+     <div class="text-2xl font-bold mb-10">
+      RATE-TALES
+     </div>
+     <ul>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-home mr-3">
+       </i>
+       <span>
+        Home
+       </span>
+      </li>
+      <li class="mb-6 flex items-center cursor-pointer" onclick="goToFavourites()">
+       <i class="fas fa-heart mr-3">
+       </i>
+       <span>
+        Favourites
+       </span>
+      </li>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-fire mr-3">
+       </i>
+       <span>
+        Trending
+       </span>
+      </li>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-calendar-alt mr-3">
+       </i>
+       <span>
+        Coming soon
+       </span>
+      </li>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-users mr-3">
+       </i>
+       <span>
+        Social
+       </span>
+      </li>
+     </ul>
+    </div>
+    <div>
+     <ul>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-cog mr-3">
+       </i>
+       <span>
+        Settings
+       </span>
+      </li>
+      <li class="mb-6 flex items-center">
+       <i class="fas fa-sign-out-alt mr-3">
+       </i>
+       <span>
+        Logout
+       </span>
+      </li>
+     </ul>
+    </div>
+   </div>
+   <!-- Main Content -->
+   <div class="w-4/5 p-5">
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-5">
+     <div class="flex items-center">
+      <i class="fas fa-search mr-5 cursor-pointer" onclick="toggleSearch()">
+      </i>
+      <i class="fas fa-bell mr-5">
+      </i>
+      <div class="dropdown relative">
+       <img alt="User Avatar" class="rounded-full cursor-pointer" src="https://placehold.co/40x40"/>
+       <div class="dropdown-content right-0 mt-2 rounded-lg shadow-lg">
+        <a href="#">
+         Profile
+        </a>
+        <a href="#">
+         Settings
+        </a>
+        <a href="#">
+         Logout
+        </a>
+       </div>
+      </div>
+      <span class="ml-3">
+       Jamal
+      </span>
+     </div>
+    </div>
+    <!-- Search Bar -->
+    <div class="mb-5 hidden" id="searchBar">
+     <input class="w-full p-2 rounded-lg bg-gray-800 text-white" id="searchInput" oninput="searchMovies()" placeholder="Search..." type="text"/>
+    </div>
+    <!-- Featured Movie -->
+    <div class="relative mb-10">
+     <img alt="Featured Movie" class="w-full h-64 object-cover rounded-lg" id="featuredImage" src="https://placehold.co/800x400"/>
+     <div class="absolute bottom-5 left-5">
+      <div class="text-4xl font-bold" id="featuredTitle">
+       GODZILLA KING OF THE MONSTERS
+      </div>
+      <div class="text-lg" id="featuredSubtitle">
+       GODZILLA: King of the Monsters 2019
+      </div>
+      <div class="text-sm" id="featuredDetails">
+       2019 | Action, Sci-Fi
+      </div>
+      <div class="text-sm" id="featuredExperience">
+       EXPERIENCE IT IN IMAX REAL D 3D DOLBY CINEMA
+      </div>
+     </div>
+     <div class="absolute top-5 right-5">
+      <i class="fas fa-heart text-2xl cursor-pointer" onclick="toggleLike(this)">
+      </i>
+     </div>
+    </div>
+    <!-- Trending Section -->
+    <div class="mb-10">
+     <div class="text-2xl font-bold mb-5">
+      Trending
+     </div>
+     <div class="scroll-container" id="trendingMovies">
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Godzilla vs Kong" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Godzilla vs Kong
+       </div>
+       <div class="text-sm">
+        2021 | Action, Sci-Fi
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Godzilla vs Kong')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Transformers: Rise of the Beasts" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Transformers: Rise of the Beasts
+       </div>
+       <div class="text-sm">
+        2023 | Sci-Fi, Action
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Transformers: Rise of the Beasts')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="TAROT" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        TAROT
+       </div>
+       <div class="text-sm">
+        2024 | Horror, Supernatural
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'TAROT')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Deadpool 3" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Deadpool 3
+       </div>
+       <div class="text-sm">
+        2024 | Action, Sci-Fi, Comedy
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Deadpool 3')">
+       </i>
+      </div>
+     </div>
+    </div>
+    <!-- For You Section -->
+    <div>
+     <div class="text-2xl font-bold mb-5">
+      For You
+     </div>
+     <div class="scroll-container" id="forYouMovies">
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Godzilla vs Kong" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Godzilla vs Kong
+       </div>
+       <div class="text-sm">
+        2021 | Action, Sci-Fi
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Godzilla vs Kong')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Transformers: Rise of the Beasts" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Transformers: Rise of the Beasts
+       </div>
+       <div class="text-sm">
+        2023 | Sci-Fi, Action
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Transformers: Rise of the Beasts')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="TAROT" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        TAROT
+       </div>
+       <div class="text-sm">
+        2024 | Horror, Supernatural
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'TAROT')">
+       </i>
+      </div>
+      <div class="scroll-item bg-gray-800 p-3 rounded-lg">
+       <img alt="Deadpool 3" class="w-full h-40 object-cover rounded-lg mb-3" src="https://placehold.co/200x300"/>
+       <div class="text-lg font-bold auto-fit-text">
+        Deadpool 3
+       </div>
+       <div class="text-sm">
+        2024 | Action, Sci-Fi, Comedy
+       </div>
+       <i class="fas fa-heart heart-icon" onclick="toggleLike(this, 'Deadpool 3')">
+       </i>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+  </script>
+ </body>
+</html>
